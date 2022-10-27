@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  database:
+    container_name: AcbDatabase
+    image: postgres:${POSTGRES_VERSION:-14}-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-acb}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secret}
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+#      - ./docker/db/data:/var/lib/postgresql/data:rw
+
+volumes:
+  db-data:
